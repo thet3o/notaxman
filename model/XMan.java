@@ -44,6 +44,9 @@ public class XMan {
       System.out.println(name + ": Ahhrg, dying...");
     }
   }
+
+
+
   // getter
   public int getHp() {
     return hp;
@@ -62,9 +65,19 @@ public class XMan {
     // other.hp = other.hp - strength;
     other.setHp(other.getHp() - getStrength());
   }
-  void move() {
-    
+
+  // Attacco XMan ravvicinato
+  public void attack(XMan[] enemies){
+    for(int i = 0; i < enemies.length; i++){
+      Position enemyPosition = enemies[i].getPosition(); 
+      if(position.getX() == enemyPosition.getX() && position.getY() == enemyPosition.getY()){
+        System.out.println(enemies[i].getHp());
+        attack(enemies[i]);
+        System.out.println(enemies[i].getHp());
+      }
+    }
   }
+  
   void catchPhrase() {
     System.out.println("I'm an X-man and my name is " + name);
   }

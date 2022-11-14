@@ -92,6 +92,9 @@ public class Game {
                 break;
             }
           break;
+        case "ATTACK":
+            player.attack(npcs);
+            break;
       }
       //updateNPCS();
       // for (String t: tokens) {
