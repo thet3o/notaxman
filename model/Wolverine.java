@@ -17,8 +17,9 @@ public class Wolverine extends XMan {
       setHp(getHp() + 5);
     }
   }
+  
   @Override
-  void attack(XMan other) {
+  public void attackEnemy(XMan other) {
     // other.hp -= strength;
     // other.hp = other.hp - strength;
     other.setHp(other.getHp() - getStrength() - getRage());

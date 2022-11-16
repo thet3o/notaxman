@@ -4,7 +4,7 @@ import util.Position;
 
 public class Game {
 
-  private XMan player;
+  private Player player;
   private XMan[] npcs;
 
   public void printGameBoard() {
@@ -47,7 +47,7 @@ public class Game {
       npc.setPosition(Position.randomPosition());
     }
     
-    XMan magneto = new XMan("Magneto");
+    Player magneto = new Player();
     magneto.setHp(12);
     magneto.setStrength(7);
     Position p = new Position(0, 0);
@@ -55,7 +55,7 @@ public class Game {
     setPlayer(magneto);
   }
 
-  public void setPlayer(XMan player) {
+  public void setPlayer(Player player) {
     this.player = player;
   }
 
@@ -93,8 +93,11 @@ public class Game {
             }
           break;
         case "ATTACK":
-            player.attack(npcs);
-            break;
+          if (tokens.length >= 3){
+            Position whereAttack = new Position(Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]));
+            player.attack(npcs, whereAttack);
+          }
+           break;
       }
       //updateNPCS();
       // for (String t: tokens) {

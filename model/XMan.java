@@ -1,5 +1,6 @@
 package model;
 import util.Position;
+import util.Utils;
 
 public class XMan {
   private int hp;
@@ -7,6 +8,7 @@ public class XMan {
   private int strength;
   private int speed = 1;
   private Position position;
+  private double range = 2.0;
 
   // consturttore vuoto (di default)
   public XMan() {
@@ -40,12 +42,16 @@ public class XMan {
   // setter
   public void setHp(int h) {
     hp = h;
-    if (hp <= 10) {
+    if (hp <= 10 && hp > 0) {
       System.out.println(name + ": Ahhrg, dying...");
+    }else if(hp <= 0){
+      System.out.println(name + " dead");
+    }else if (h <= 0) {
+      System.out.println("Player DEAD");
+      System.exit(0);
     }
+    System.out.println(hp);
   }
-
-
 
   // getter
   public int getHp() {
@@ -59,22 +65,31 @@ public class XMan {
   public String getName() {
     return name;
   }
+
+  public void setRange(double range) {
+      this.range = range;
+  }
   
-  void attack(XMan other) {
-    //other.hp -= strength;
-    // other.hp = other.hp - strength;
+  public double getRange() {
+      return range;
+  }
+
+  void attackEnemy(XMan other) {
     other.setHp(other.getHp() - getStrength());
   }
 
-  // Attacco XMan ravvicinato
-  public void attack(XMan[] enemies){
-    for(int i = 0; i < enemies.length; i++){
-      Position enemyPosition = enemies[i].getPosition(); 
-      if(position.getX() == enemyPosition.getX() && position.getY() == enemyPosition.getY()){
-        System.out.println(enemies[i].getHp());
-        attack(enemies[i]);
-        System.out.println(enemies[i].getHp());
+  //NPCs
+  public void counterattack(XMan player){
+    if(Utils.range(getPosition(), player.getPosition()) <= getRange()){
+      if(position.getX() == player.getPosition().getX() && position.getY() == player.getPosition().getY()){
+        System.out.println("Player FOUND");
+        attackEnemy(player);
+        return;
+      }else{
+        System.out.println("404 Player not found!");
       }
+    }else{
+      System.out.println("Out of range!");
     }
   }
   
@@ -98,12 +113,14 @@ public class XMan {
   }
   public void moveN() {
     position.setY(position.getY() - speed);
+    System.out.println(position.getX() + " " + position.getY());
   }
   public void moveS() {
     position.setY(position.getY() + speed);
   }
   public void moveE() {
     position.setX(position.getX() + speed);
+    System.out.println(position.getX() + " " + position.getY());
   }
   public void moveW() {
     position.setX(position.getX() - speed);
