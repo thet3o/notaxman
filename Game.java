@@ -97,7 +97,9 @@ public class Game {
             Position whereAttack = new Position(Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]));
             player.attack(npcs, whereAttack);
           }
-           break;
+          break;
+        case "DEBUG":
+          player.setHp(0);
       }
       //updateNPCS();
       // for (String t: tokens) {

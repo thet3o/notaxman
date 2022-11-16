@@ -45,10 +45,12 @@ public class XMan {
     if (hp <= 10 && hp > 0) {
       System.out.println(name + ": Ahhrg, dying...");
     }else if(hp <= 0){
-      System.out.println(name + " dead");
-    }else if (h <= 0) {
-      System.out.println("Player DEAD");
-      System.exit(0);
+      if(this instanceof Player){
+        System.out.println("Player DEAD");
+        System.exit(0);
+      }else{
+        System.out.println(name + " dead");
+      }  
     }
     System.out.println(hp);
   }

@@ -14,7 +14,11 @@ public class Player extends XMan{
           for(int i = 0; i < entities.length; i++){
             if(whereAttack.getX() == entities[i].getPosition().getX() && whereAttack.getY() == entities[i].getPosition().getY()){
                 System.out.println("ENEMY FOUND");
-                entities[i].setHp(entities[i].getHp() - getStrength());
+                if(entities[i].getHp() > 0){
+                    entities[i].setHp(entities[i].getHp() - getStrength());
+                }else{
+                    System.out.println("Already dead!");
+                }
                 return;
             }
           }
