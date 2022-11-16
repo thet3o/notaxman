@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import model.*;
 import util.Position;
@@ -5,10 +7,13 @@ import util.Position;
 public class Game {
 
   private Player player;
-  private XMan[] npcs;
+  private List<XMan> npcs;
 
   public void printGameBoard() {
     StringBuilder gb = new StringBuilder();
+    //Screen clean
+    //System.out.print("\033[H\033[2J");  
+    //System.out.flush();
     for (int y = Position.minY; y <= Position.maxY; y++) {
       for (int x = Position.minX; x <= Position.maxX; x++) {
         boolean empty = true;
@@ -33,6 +38,7 @@ public class Game {
       gb.append("\n");
     }
     System.out.println(gb.toString());
+    System.out.println("Player position[x, y]: " + player.getPosition().getX() + " " + player.getPosition().getY());
   }
 
   public void setup() {
@@ -42,7 +48,10 @@ public class Game {
     Position.maxY = 5;
 
     // setup npcs
-    npcs = new XMan[] { new Wolverine(),  new Wolverine()};
+    npcs = new ArrayList<XMan>();
+    npcs.add(new Wolverine());
+    npcs.add(new Wolverine());
+
     for (XMan npc : npcs) {
       npc.setPosition(Position.randomPosition());
     }

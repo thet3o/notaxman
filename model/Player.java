@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 import util.*;
 
 public class Player extends XMan{
@@ -8,14 +10,15 @@ public class Player extends XMan{
         super("Player");
     }
 
-    public void attack(XMan[] entities,Position whereAttack){
+    public void attack(List<XMan> entities,Position whereAttack){
         System.out.println(Utils.range(getPosition(), whereAttack));
         if(Utils.range(getPosition(), whereAttack) <= getRange()){
-          for(int i = 0; i < entities.length; i++){
-            if(whereAttack.getX() == entities[i].getPosition().getX() && whereAttack.getY() == entities[i].getPosition().getY()){
+          for(int i = 0; i < entities.size(); i++){
+            if(whereAttack.getX() == entities.get(i).getPosition().getX() && whereAttack.getY() == entities.get(i).getPosition().getY()){
                 System.out.println("ENEMY FOUND");
-                if(entities[i].getHp() > 0){
-                    entities[i].setHp(entities[i].getHp() - getStrength());
+                if(entities.get(i).getHp() > 0){
+                    entities.get(i).setHp(entities.get(i).getHp() - getStrength());
+                    if(entities.get(i).getHp() <= 0){ entities.remove(i);} // Rimuovi nemico dalla mappa
                 }else{
                     System.out.println("Already dead!");
                 }

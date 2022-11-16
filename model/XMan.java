@@ -13,7 +13,7 @@ public class XMan {
   // consturttore vuoto (di default)
   public XMan() {
     //System.out.println("XMan constructor");
-    setHp(100);
+    setHp(10);
   }
   public XMan(String newName) {
     name = newName;
